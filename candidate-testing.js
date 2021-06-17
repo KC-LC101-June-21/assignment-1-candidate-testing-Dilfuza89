@@ -40,20 +40,37 @@ function askQuestion()
 function gradeQuiz(candidateAnswers) 
 {
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-  let grade;
+  let grade = 0;
+  let status;
   console.log(`Candidate Name: ${candidateName}`);
   for (let i = 0; i < candidateAnswers.length; i++)
   {
     console.log(`${i+1}) ${questions[i]}\nYour Answer: ${candidateAnswers[i]}\nCorrect Answer: ${correctAnswers[i]}\n`);
+
+    if (candidateAnswers[i].toUpperCase() == correctAnswers[i].toUpperCase())
+    {
+      grade++;
+    }
   }
+  
+  if ( grade >= 4)
+  {
+    status = "PASSED";
+  }
+  else
+  {
+    status = "FAILED";
+  }
+
+  console.log(`>>> Overall Grade: ${grade/5*100}% (${grade} of 5 responses correct) <<< \n>>> Status: ${status} <<<`);
 
   return grade;
 }
 
 function runProgram() 
 {
-  askForName();
   // TODO 1.1c: Ask for candidate's name //
+  askForName();
   console.log(`Welcome to Candidate Testing, ${candidateName}!\n`);
   askQuestion();
   gradeQuiz(this.candidateAnswers);
